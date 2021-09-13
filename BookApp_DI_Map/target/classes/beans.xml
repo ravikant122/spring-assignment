@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<bean id="bookService" class="com.training.model.service.BookServiceImpl" autowire="byType">
+		<property name="dao" ref="bookDao"></property>
+	</bean>
+	<bean id="bookDao" class="com.training.model.persistance.BookDaoImpl" lazy-init="true">
+		<property name="counter" value="3" />
+		<property name="booksMap">
+			<map>
+				<entry key="1" value-ref="book1" />
+				<entry key="2" value-ref="book2" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="book1" class="com.training.model.entity.Book"
+	   p:id="1" p:isbn="ABC123" p:title="Head first Java" p:author="Katthy"	p:price="600" />
+	   
+	<bean id="book2" class="com.training.model.entity.Book"
+	   p:id="2" p:isbn="PQR123" p:title="spring in action" p:author="sdfsf"	p:price="700" />
+</beans>
